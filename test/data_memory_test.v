@@ -9,7 +9,7 @@ parameter Width = 32;
 reg clk = 0;
 reg MemWrite = 1, MemRead = 1;
 reg [7:0] Addr = 8'b00000000;
-reg [Width-1:0] WrData = {{Width/2{2'b10}}};
+reg [Width-1:0] WrData = {Width/2{2'b10}};
 
 wire [Width-1:0] ReadData;
 
@@ -22,13 +22,12 @@ DataMemory #(Width) dm (
     .ReadData(ReadData)
 );
 
-always @ (*)
+initial #200 $finish;
+always #5 clk <= ~clk;
+
+always @ (ReadData)
 begin
     $monitor("%b", ReadData);
-    #5 clk = ~clk;
-    #5 clk = ~clk;
-    #5 clk = ~clk;
-    #200 $finish;
 end
 
 endmodule
