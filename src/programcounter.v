@@ -10,7 +10,6 @@ initial PC = 32'b0;
 always @ (posedge clk)
 begin
     PC <= PCnext;
-    $monitor("pc = %b", PC);
 end
 
 endmodule
