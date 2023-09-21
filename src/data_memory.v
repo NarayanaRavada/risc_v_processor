@@ -1,7 +1,8 @@
-module DataMemory #(parameter Width = 32) (
+module DataMemory #(parameter Width = 32) 
+(
     input clk, MemWrite, MemRead,
-    input [7:0] Addr,
-    input [Width-1:0] WrData,
+    input [Width-1:0] Addr,
+    input [Width-1:0] WriteData,
     output reg [Width-1:0] ReadData
 );
 
@@ -10,7 +11,7 @@ integer i;
 
 initial
 begin
-    for (i = 0; i < 511; i++)
+    for (i = 0; i < 511; i = i + 1)
     begin
         mem[i] = {Width{1'b0}};
     end
@@ -25,7 +26,7 @@ begin
 
     if (MemWrite == 1'b1)
     begin
-        mem[Addr] <= WrData;
+        mem[Addr] <= WriteData;
     end
 end
 

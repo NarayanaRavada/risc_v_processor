@@ -1,4 +1,4 @@
-module Add #(parameter Width = 32) 
+module Adder #(parameter Width = 32) 
 (
     input [Width-1:0] A, B,
     output [Width-1:0] out

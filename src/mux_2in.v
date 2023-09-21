@@ -5,6 +5,5 @@ module Mux2 #(parameter Width = 32)
     output [Width-1 : 0] out
 );
 
-assign out = s ? A : B;
+assign out = s ? B : A;
 endmodule
-

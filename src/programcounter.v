@@ -1,19 +1,16 @@
-module ProgramCounter (
-    input clk, PCen, rst,
-    input [7:0] PCnext,
-    output reg [7:0] PC
+module ProgramCounter #(parameter Width = 32)
+(
+    input clk,
+    input [Width-1:0] PCnext,
+    output reg [Width-1:0] PC
 );
 
-always @ (posedge clk or posedge rst)
+initial PC = 32'b0;
+
+always @ (posedge clk)
 begin
-    if (rst) 
-    begin
-        PC <= 8'h00;
-    end
-    else 
-    begin
-        PC <= PCnext;
-    end
+    PC <= PCnext;
+    $monitor("pc = %b", PC);
 end
 
 endmodule
