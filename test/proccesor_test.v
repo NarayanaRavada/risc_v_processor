@@ -12,7 +12,7 @@ initial forever #5 clk = ~clk;
 initial
 begin
     #4 rst = 0;
-    #500 $finish;
+    #10000 $finish;
 end
 
 endmodule

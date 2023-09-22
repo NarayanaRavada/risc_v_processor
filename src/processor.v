@@ -1,3 +1,13 @@
+/*
+██████╗ ██╗███████╗ ██████╗          ██╗   ██╗
+██╔══██╗██║██╔════╝██╔════╝          ██║   ██║
+██████╔╝██║███████╗██║         █████╗██║   ██║
+██╔══██╗██║╚════██║██║         ╚════╝╚██╗ ██╔╝
+██║  ██║██║███████║╚██████╗           ╚████╔╝ 
+╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝            ╚═══╝  
+*/
+
+
 `include "../src/mux_2in.v"
 `include "../src/programcounter.v"
 `include "../src/adder.v"
@@ -24,7 +34,7 @@ wire [3:0] ctrlSig;
 
 Mux2 #(32) m1(PCp4, PCtarget, PCsrc, PCinput);
 ProgramCounter #(32) pc(clk, PCinput, PC);
-Adder #(32) a1(PC, 4, PCp4);
+Adder #(32) a1(PC, 1, PCp4);
 InstructionMemory #(32) Im(PC, RD);
 MainDecoder Md(RD[6:0], RegWrite, ALUSrc, MemWrite, Branch, jump, ImmSrc, ResultSrc, AluOp);
 ImmediateExtractor #(32) Ie(ImmSrc, RD, ImmEx);

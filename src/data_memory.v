@@ -7,7 +7,7 @@ module DataMemory #(parameter Width = 32)
 );
 
 reg [Width-1:0] mem[511:0];
-integer i;
+integer i, f;
 
 initial
 begin
@@ -15,6 +15,19 @@ begin
     begin
         mem[i] = {Width{1'b0}};
     end
+end
+
+initial
+begin
+    #9000
+    f = $fopen("../test/data.mem");
+    $fwrite(f, "Data \t\t\t\t Addr\n");
+    $fwrite(f, "-------------------------\n");
+    for (i = 0; i < 100; i = i + 1) 
+    begin
+        $fwrite(f, "32'h%h %d\n", mem[i], i);
+    end
+    $fclose(f);
 end
 
 always @ (posedge clk)

@@ -28,7 +28,6 @@ begin
     else if(RegWrite)
     begin 
     reg_mem[WR1] <= WD;
-    $monitor("%0t : d6 = %d, d4 = %d, d8 = %d", $time, reg_mem[6], reg_mem[4], reg_mem[8]);
     end
 end
     assign RD1 = reg_mem[RR1];
