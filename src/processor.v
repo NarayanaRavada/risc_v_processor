@@ -16,7 +16,7 @@ module processor #(parameter Width = 32)
 );
 
 wire [31:0] PC, PCp4, PCinput, PCtarget;
-wire RegWrite, AluSrc, MemWrite, Branch, PCsrc;
+wire RegWrite, AluSrc, MemWrite, Branch, PCsrc, Zero;
 wire [1:0] ImmSrc, ResultSrc, AluOp;
 wire [Width-1:0] ImmEx;
 wire [Width-1:0] RD, RD1, RD2, WriteData, AluOut, ReadData, MuxedAddr; 
@@ -31,12 +31,11 @@ ImmediateExtractor #(32) Ie(ImmSrc, RD, ImmEx);
 RegisterFile Rf(clk, RegWrite, rst, RD[19:15], RD[24:20], RD[11:7], WriteData, RD1, RD2);
 Mux2 #(32) m2(RD2, ImmEx, ALUSrc, MuxedAddr);
 AluControl AC(AluOp, RD[31:25], RD[14:12], ctrlSig);
-Alu #(32) Alu(ctrlSig, RD1, MuxedAddr, AluOut, carry, zero);
+Alu #(32) Alu(ctrlSig, RD1, MuxedAddr, AluOut, carry, Zero);
 DataMemory #(32) Dm(clk, MemWrite, MemRead, AluOut, RD2, ReadData);
 Mux3 #(32) m3(ReadData, AluOut, PCp4, ResultSrc, WriteData);
 Adder #(32) a2(PC, ImmEx, PCtarget);
-and And(andOut, Branch, Zero);
-or Or(PCsrc, andOut, jump);
-
+nand And(andOut, Branch, Zero);
+and Or(PCsrc, andOut, jump);
 
 endmodule

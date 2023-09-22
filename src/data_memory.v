@@ -26,7 +26,7 @@ begin
 
     if (MemWrite == 1'b1)
     begin
-        mem[Addr] <= WriteData;
+        mem[Addr] = WriteData;
     end
 end
 

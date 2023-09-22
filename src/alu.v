@@ -36,11 +36,6 @@ begin
     carry = 0;
 end
 
-always @ (zero)
-begin
-    $display("zero = %b", zero);
-end
-
 always @(*)
 begin
     case(ctrlSig)
@@ -58,9 +53,9 @@ begin
             carry <= (op1 > op2 ? 1 : 0);
         end
 
-        default: aluOut <= 32'b0;
+        default: aluOut <= 32'bx;
     endcase
-    zero <= aluOut == 0;
+    zero = aluOut == 0;
 end
 
 endmodule
